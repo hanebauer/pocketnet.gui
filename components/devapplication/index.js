@@ -31,7 +31,13 @@ var devapplication = (function () {
         clearErrors();
 
         const updatedData = prepareAppData();
-        if (!validateAppData(updatedData)) {
+
+        const hasValidatedAppData = validateAppData({
+          ...updatedData,
+          scope: updatedData.scope || (application.hash && "Not Filled"),
+        });
+
+        if (!hasValidatedAppData) {
           currentStatus = "view";
           return globalpreloader(false);
         }
@@ -106,7 +112,7 @@ var devapplication = (function () {
           );
         }
 
-        if (application.scope.includes("localhost")) {
+        if (!application.scope || application.scope.includes("localhost")) {
           return sitemessage(
             self.app.localization.e("miniApp_localhostScopeWarningMessage")
           );
@@ -120,6 +126,7 @@ var devapplication = (function () {
           address: application.manifest?.author,
           name: application.manifest?.name,
           scope: application.scope,
+          tscope: application.tscope ?? "",
           description:
             application.manifest?.description ||
             application.manifest.descriptions?.["en"],
@@ -161,6 +168,7 @@ var devapplication = (function () {
         id: el.c.find("#app-id").val(),
         version: el.c.find("#app-version").val(),
         scope: el.c.find("#app-scope").val(),
+        tscope: el.c.find("#app-tscope").val(),
         name: el.c.find("#app-name").val(),
         tags: el.c
           .find(".tag")
@@ -183,12 +191,9 @@ var devapplication = (function () {
           selector: "#app-scope",
           message: self.app.localization.e("miniApp_scopeInvalidMessage"),
           condition: (value) => {
-            const localhostPattern = /^localhost:\d+$/;
+            if (!value) return true;
             const domainPattern = /^[a-zA-Z0-9.-]+$/;
-            return (
-              localhostPattern.test(value) ||
-              (domainPattern.test(value) && value.indexOf("https") === -1)
-            );
+            return domainPattern.test(value) && value.indexOf("https") === -1;
           },
         },
         {
@@ -203,10 +208,31 @@ var devapplication = (function () {
           message: self.app.localization.e("miniApp_idInvalidMessage"),
           condition: (value) => /^[a-z0-9]+(\.[a-z0-9]+)+$/.test(value),
         },
+        {
+          value: appData.tscope,
+          selector: "#app-tscope",
+          message: self.app.localization.e("miniApp_tScopeInvalidMessage"),
+          condition: (value) => {
+            if (!value) return true;
+            const localhostPattern = /^localhost:\d+$/;
+            const domainPattern = /^[a-zA-Z0-9.-]+$/;
+            return (
+              localhostPattern.test(value) ||
+              (domainPattern.test(value) && value.indexOf("https") === -1)
+            );
+          },
+        },
       ];
 
       var hasErrors = validationRules.some(validateField);
       return !hasErrors;
+    }
+
+    function addAssetsLoadHandler(_p, selector) {
+      _p.el.find(selector).on("blur", function () {
+        renders.appIconPreview(this.value);
+        renders.showManifestButton(this.value);
+      });
     }
 
     var validateField = function ({
@@ -298,13 +324,16 @@ var devapplication = (function () {
             _p.el.find(".save-btn").on("click", actions.createApp);
             _p.el.find(".cancel-btn").on("click", actions.goToIndex);
 
-            ["#app-name", "#app-scope", "#app-id"].forEach((selector) =>
-              _p.el.find(selector).on("input", () => clearErrors(selector))
+            ["#app-name", "#app-scope", "#app-id", "#app-tscope"].forEach(
+              (selector) =>
+                _p.el.find(selector).on("input", () => clearErrors(selector))
             );
             _p.el.find("#app-scope").on("blur", function () {
               renders.appIconPreview(this.value);
               renders.showManifestButton(this.value);
             });
+            addAssetsLoadHandler(_p, "#app-scope");
+            addAssetsLoadHandler(_p, "#app-tscope");
             renders.deploymentInstructions();
             renders.tagInput({
               tags: [],
@@ -331,7 +360,9 @@ var devapplication = (function () {
           })
           .catch(() => {
             el.c.find("#manifestButtonContainer").empty();
-            handleAppError({ message: "import:manifest" });
+            handleAppError({
+              message: "import:manifest",
+            });
           });
       },
       deploymentInstructions: function () {
@@ -427,19 +458,19 @@ var devapplication = (function () {
             name: application?.name,
             version: application?.version,
             scope: application?.scope?.replace(/^https?:\/\//, ""),
+            tscope: application?.tscope?.replace(/^https?:\/\//, ""),
           },
         },
         function (_p) {
           renders.appIconPreview(application.scope);
           _p.el.find(".save-btn").on("click", actions.editApp);
           _p.el.find(".cancel-btn").on("click", actions.cancelEdit);
-          _p.el.find("#app-scope").on("blur", function () {
-            renders.appIconPreview(this.value);
-            renders.showManifestButton(this.value);
-          });
+          addAssetsLoadHandler(_p, "#app-scope");
+          addAssetsLoadHandler(_p, "#app-tscope");
           renders.deploymentInstructions();
-          ["#app-name", "#app-version", "#app-scope"].forEach((selector) =>
-            _p.el.find(selector).on("input", () => clearErrors(selector))
+          ["#app-name", "#app-version", "#app-scope", "#app-tscope"].forEach(
+            (selector) =>
+              _p.el.find(selector).on("input", () => clearErrors(selector))
           );
           renders.tagInput({
             tags: application.tags || [],
