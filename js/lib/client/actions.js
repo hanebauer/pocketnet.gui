@@ -214,7 +214,9 @@ var ActionOptions = {
 
 var errorCodesAndActionsExecutors = {
     wait : function(action){
-        action.rejectWait = (new Date()).addSeconds(60 * 2)
+        
+        if(!action.rejectWait)
+            action.rejectWait = (new Date()).addSeconds(60 * 2)
 
         return Promise.resolve()
     },
@@ -335,7 +337,7 @@ var Action = function(account, object, priority, settings){
             self.sending = new Date(e.sending)
 
         if (e.rejectWait) 
-            self.rejectWait = new Date(rejectWait)
+            self.rejectWait = new Date(e.rejectWait)
 
         if (e.checkedUntil)
             self.checkedUntil = new Date(e.checkedUntil)
@@ -1040,6 +1042,9 @@ var Action = function(account, object, priority, settings){
         if (self.rejected){
 
             if (self.rejectWait && self.rejectWait > new Date()){
+                
+            }
+            else{
                 self.rejectWait = null
                 self.rejected = null
             }
