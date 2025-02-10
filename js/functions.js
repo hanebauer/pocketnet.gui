@@ -9943,6 +9943,8 @@ if (typeof window != 'undefined') {
 
 	if (splashScreen) {
 
+		
+
 
 		var splashScreenIcon = document.querySelector('#splashScreen .icon');
 		var stopRotation = false;
@@ -9974,7 +9976,6 @@ if (typeof window != 'undefined') {
 						return;
 
 					splashScreenIcon.classList.remove("rotate");
-					splashScreenIcon.classList.add('zoom-out-rotate');
 					splashScreen.classList.add('fade-out');
 					// When zoom out animation is done, completely remove the splash screen
 					setTimeout(() => {
@@ -10003,7 +10004,6 @@ if (typeof window != 'undefined') {
 			// Start rotating the logo
 			window.requestAnimationFrame(() => {
 				splashScreenIcon.classList.remove('zoom-in');
-				splashScreenIcon.classList.add('rotate');
 				// Triggered every times we reached the end of the rotating animation
 				rotatingAnimationEnded();
 				splashScreeninterval = setInterval(rotatingAnimationEnded, rotatingDuration);
