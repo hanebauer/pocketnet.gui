@@ -1,11 +1,11 @@
 name: Report a bug
-description: Report a bug that isn't caused by Bastyon. If unsure, use this form
+description: Report a bug that isn't caused by Lotos. If unsure, use this form
 body:
   - type: markdown
     attributes:
       value: |
         ## Self Check
-        - Look for similar errors in existing [GitHub Issues](https://github.com/pocketnetteam/pocketnet.gui/issues) (open or closed).
+        - Look for similar errors in existing [GitHub Issues](https://github.com/hanebauer/pocketnet.gui/issues) (open or closed).
   - type: textarea
     validations:
       required: true
