@@ -1,0 +1,135 @@
+{
+    "url" : "lotos.social",
+    "turl" : "test.lotos.social",
+    "name" : "Lotos",
+    "fullname" : "Lotos",
+    "developapps" : [{
+        "id" : "barteron.pocketnet.app",
+        "version": "1.0.0",
+        "scope" : "barteron.club",
+        "cantdelete" : true,
+        "develop" : true,
+        "install" : true,
+        "name" : "Barteron",
+        "grantedPermissions" : ["account", "chat"],
+        "includeinsearch" : true,
+        "includeminiapps" : true,
+        "store" : {"g" : true}
+    },{
+        "id": "app.pocketnet.blockexplorer",
+        "version": "0.0.1",
+        "scope": "bastyon.com/blockexplorer",
+        "cantdelete": true,
+        "name": "Block Explorer",
+        "develop": true,
+        "install": true,
+        "store": {"g" : true, "i" : true},
+        "author": "PHdW4pwWbFdoofVhSEfPSHgradmrvZdbE5"
+    }],
+    "protocol" : "bastyon",
+    "support" : "support@lotos.io",
+    "lname" : "Lotos Community",
+	"blockexplorer" : "https://bastyon.com/blockexplorer/",
+    "servers" : {
+        "production" : {
+            "proxy" : [
+                {
+                    "host" : "proxy.brighteon.io",
+                    "port" : 443,
+                    "wss" : 443
+                }
+            ],
+        
+            "translateProxy" : {
+                "host" : "2.pocketnet.app",
+                "port" : 8899,
+                "wss" : 8099
+            },
+            
+            "matrix" : "matrix.pocketnet.app"
+        },
+
+        "test" : {
+            "proxy" : [
+                {
+                    "host" : "test.pocketnet.app",
+                    "port" : 8899,
+                    "wss" : 8099
+                }
+            ],
+        
+            "translateProxy" : {
+                "host" : "2.pocketnet.app",
+                "port" : 8899,
+                "wss" : 8099
+            },
+        
+            "matrix" : "test.matrix.pocketnet.app"
+        }
+    },
+    "forbiddenNames" : [
+        "bastyon", "pocketnet", "brighteon", "lotos"
+    ],
+    "applications" : {
+        "ui" : {
+            "android" : {
+                "github" : {
+                    "name": "Lotos.apk",
+                    "gfname": "LotosGF.apk",
+                    "url": "https://api.github.com/repos/hanebauer/pocketnet.gui/releases/latest"
+                }
+            },
+            
+            "windows" : {
+                "github" : {
+                    "name": "LotosSetup.exe",
+                    "url": "https://api.github.com/repos/hanebauer/pocketnet.gui/releases/latest"
+                }
+            },
+            "macos" : {
+                "github" : {
+                    "name": "LotosSetup.dmg",
+                    "url": "https://api.github.com/repos/hanebauer/pocketnet.gui/releases/latest",
+                    "page": "https://github.com/brighteon/pocketnet.gui/blob/master/README.md#download-brighteon-on-your-devices"
+                }
+            },
+            "linux" : {
+                "github" : {
+                    "name": "LotosSetup.deb",
+                    "url": "https://api.github.com/repos/hanebauer/pocketnet.gui/releases/latest",
+                    "page": "https://github.com/brighteon/pocketnet.gui/blob/master/README.md#download-brighteon-on-your-devices"
+                }
+            }
+        },
+        "node": {
+            "windows": {
+                "github": {
+                    "name": "pocketnetcore_0.22.0_win_x64_setup.exe",
+                    "url": "https://api.github.com/repos/hanebauer/pocketnet.core/releases/latest"
+                }
+            },
+
+            "linux": {
+                "github": {
+                    "name": "Pocketnet_linux_x64.AppImage",
+                    "url": "https://api.github.com/repos/hanebauer/pocketnet.core/releases/latest"
+                }
+            }
+        }
+    },
+
+    "cordova" : {
+        "name" : "social.lotos",
+        "displayName" : "Lotos",
+        "iosTeamId" : "",
+        "reversedClientId" : "",
+        "iosUrlScheme" : "lotos",
+        "groupIdentifier" : "group.social.brighteon"
+    },
+
+    "electron" : {
+        "protocol" : "lotos"
+    },
+    "regAccounts" : ["PEj7QNjKdDPqE9kMDRboKoCtp8V6vZeZPd"],
+    "adminTools" : true
+}

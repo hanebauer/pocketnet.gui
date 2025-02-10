@@ -2329,6 +2329,7 @@ _l.lowstar_reason_2 = "Child exploitation"
 _l.lowstar_reason_3 = "Direct threat of violence"
 _l.lowstar_reason_4 = "Illegal narcotics"
 _l.lowstar_reason_5 = "Copyrighted content"
+_l.lowstar_reason_6 = "Spam"
 
 _l.lowstar2 = "Please do not use 1 and 2 star ratings for other reasons. After the new moderation is released in mid. May you will be able to use low ratings for other reasons"
 _l.lowstaragree = "I confirm that this post contains one of four types of prohibited content"
@@ -2798,7 +2799,8 @@ _l.labeltempactionszero = "No pending transactions"
 _l.deleteapplicationQuestion = "Are you sure you want to delete the application?"
 _l.deleteapplicationQuestionDevelop = "Are you sure you want to delete the application? For applications that are in development mode, this function only simulates uninstallation and resets settings until the next launch."
 _l.application_settings = "Settings"
-_l.application_close = "Close"
+_l.application_close = "Return to the " + appname;
+
 
 _l.application_notexist = "Application not found or application server not responding"
 _l.permissions_descriptions_chat = "Send "+appname+" chat messages, create groups and chats"

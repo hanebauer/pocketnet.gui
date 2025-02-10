@@ -593,6 +593,10 @@
 #lenta.byauthor.mainvideo .shares .authorgroup:nth-child(2n + 1) {
   clear: left;
 }
+html.television #lenta.mainvideo .shares {
+  display: block;
+  overflow: hidden;
+}
 #lenta.horizontal {
   display: flex;
   flex-grow: 1;
@@ -626,6 +630,9 @@
   flex-wrap: nowrap;
   flex-grow: 1;
   flex-direction: row;
+  margin-right: 0.5em;
+}
+#lenta.horizontal .authorgroup {
   margin-right: 0.5em;
 }
 #lenta.horizontal .loader,
@@ -797,6 +804,13 @@
 @media only screen and (max-width: 1180px) {
   #lenta.mainvideo .shares .authorgroup {
     width: 50%;
+    clear: none;
+  }
+  #lenta.mainvideo .shares .authorgroup:nth-child(3n + 1) {
+    clear: none;
+  }
+  #lenta.mainvideo .shares .authorgroup:nth-child(2n + 1) {
+    clear: left;
   }
 }
 /*t*/

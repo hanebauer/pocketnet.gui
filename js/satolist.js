@@ -444,9 +444,14 @@ Platform = function (app, listofnodes) {
         'P9QRW8rWPhPeW2iQs74eKBbtgvmQBk9iEM': true,
         'PNhZXx4nNH75CLhh7Gsaho3JyAg9VBhi4y': true,
         'PXP4ZqvpnfUShULfEMd2DQ6KeNfZkXhvVn': true,
+        'PEXwT2KPZExkfmhFkPHGnPNM3X8BMts3WQ': true,
+        'PV8dMspgwMzHgaDQhdYp5vbJn2zCYJ8ETE': true,
+        'PERp8vWf5unpQNt5ujudv8Z5oeDJbEF87d': true,
+        'PNwiPqCQ1RZHjMedbPSzJSPwGEDs3s3hvt': true,
+        'PFPUjAhCAdPJN8PbxK3pvHX8pv969RJ198': true,
+        'PCja68KWVefRuX8ZKVstkK9HtVCirhLAj4': true,
+        'P9HKxUQ9TKn9kEc1sivMPeggxMsssS92FK': true,
         
-
-
     }
 
     self.bch = {
@@ -5394,7 +5399,7 @@ Platform = function (app, listofnodes) {
 
             if (!p) p = {}
 
-            if (self.app.mobileview || p.dlg) {
+            if (self.app.mobileview || p.dlg || self.app.television) {
                 return self.api.mobiletooltip(_el, content, clbk, p, tooltip)
             }
 
@@ -15032,6 +15037,17 @@ Platform = function (app, listofnodes) {
 
             },
 
+            getbyids: function (ids = [], _k) {
+                var allcats = self.sdk.categories.get(_k)
+
+                var cats = _.filter(allcats, function (c) {
+                    return ids.indexOf(c.id > -1)
+                })
+
+                return cats
+
+            },
+
             search: function (name) {
 
                 return _.filter(self.sdk.categories.get(), function (c) {
@@ -15092,7 +15108,22 @@ Platform = function (app, listofnodes) {
                 } catch (e) {}
 
 
-                if (!p.settings) p.settings = {}
+                if(!p.settings) {
+                    p.settings = {}
+
+                    if(window.project_config.preferredtags && window.project_config.preferredtags.length){
+
+                        p.settings.selected = {}
+
+                        _.each(self.sdk.categories.data.all, (cats, k) => {
+                            p.settings.selected[k] = {}
+
+                            _.each(window.project_config.preferredtags, (id) => {
+                                p.settings.selected[k][id] = true
+                            })
+                        })
+                    }
+                }
 
                 self.sdk.categories.settings = p.settings
 
@@ -15100,6 +15131,7 @@ Platform = function (app, listofnodes) {
                 self.sdk.categories.settings.selected || (self.sdk.categories.settings.selected = {})
                 self.sdk.categories.settings.added || (self.sdk.categories.settings.added = {})
                 self.sdk.categories.settings.excluded || (self.sdk.categories.settings.excluded = {})
+
 
                 if (clbk) clbk()
             }
@@ -15712,8 +15744,25 @@ Platform = function (app, listofnodes) {
 
                     }
 
+                    //
+
                     self.psdk.search.request(() => {
-                        return self.app.api.rpc('search', np)
+
+                        var options = {}
+
+                        var nodes = ['135.181.196.243:38081', '65.21.56.203:38081']
+
+                        console.log('type', type)
+
+                        if (type == 'videos'){
+                            options.rpc = {
+                                fnode: nodes[rand(0, nodes.length - 1)]
+                            }
+                        }
+
+                        console.log('type options', options)
+
+                        return self.app.api.rpc('search', np, options)
                     }, np).then(d => {
 
                         if (type != 'fs') {
@@ -15723,7 +15772,7 @@ Platform = function (app, listofnodes) {
                                     s.add(value, fixedBlock, k, d, start, count, address)
                                 })
                             } else {
-                                d = d[type] || {
+                                d = d[type == 'videos' ? 'posts' : type] || {
                                     data: []
                                 }
 
@@ -20604,7 +20653,7 @@ Platform = function (app, listofnodes) {
 
                             var share = self.app.platform.psdk.share.get(data.txid)
 
-                            if (share && share.itisstream()) {
+                            if (share && (share.itisstream() || (share.itisvideo() && self.app.television))) {
 
                                 platform.app.nav.api.load({
                                     open: true,
@@ -22478,7 +22527,7 @@ Platform = function (app, listofnodes) {
                         clbk(data, loadedData);
                     })
 
-                    if (!_Node) {
+                    if (!_Node && !platform.app.television) {
                         if (audio && !window.cordova && platform.sdk.usersettings.meta.sound.value) {
 
                             if (!audio.if || audio.if(data, loadedData)) {
@@ -24486,7 +24535,8 @@ Platform = function (app, listofnodes) {
             }
 
             setTimeout(() => {
-                if (typeof initShadowPopups === 'function') initShadowPopups()
+                console.log('self.app.television', self.app.television)
+                if (typeof initShadowPopups === 'function' && !self.app.television) initShadowPopups()
             }, 1000)
 
 
@@ -24637,6 +24687,7 @@ Platform = function (app, listofnodes) {
             if (self.matrixchat.inited) return
             if (self.matrixchat.initing) return
             if (_OpenApi) return
+            if (self.app.television) return
 
             self.matrixchat.initing = true
 

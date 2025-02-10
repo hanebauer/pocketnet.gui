@@ -1279,9 +1279,7 @@ Share = function(lang){
 				return false
 			}
 		},
-		/*clear : function(t){
-			return t.substr(0, 25).toLowerCase().replace(/[^\w]/g, "")
-		},*/
+
 		set : function(tags){
 
 			if(typeof tags == 'undefined'){
@@ -1294,7 +1292,7 @@ Share = function(lang){
 
 						var bycategories = app.platform.sdk.categories.fromTags(tags, self.language.v)
 
-						if (bycategories.categories.length > 2){
+						if (bycategories.categories.length > 2 + (window.project_config.preferredtags || []).length){
 							return false
 						}
 
@@ -1315,14 +1313,14 @@ Share = function(lang){
 
 					if(!tags) return;
 
-						tags = clearTagString(tags)
+					tags = clearTagString(tags)
 
 					var tta = _.uniq(_.clone(this.v).concat(tags))
 
 					if(typeof app != 'undefined'){
 						var bycategories = app.platform.sdk.categories.fromTags(tta, self.language.v)
 
-						if (bycategories.categories.length > 2){
+						if (bycategories.categories.length > 2 + (window.project_config.preferredtags || []).length){
 							return false
 						}
 					}
@@ -2337,6 +2335,7 @@ brtOffer = function(){
 	self.condition = [];
 	self.images = [];
 	self.geohash = '';
+	self.currencyPrice = {};
 	self.price = 0;
 	self.published = 'published';
 
@@ -2363,7 +2362,8 @@ brtOffer = function(){
 						t: self.tag,
 						a: self.tags,
 						c: self.condition,
-						p: self.published
+						p: self.published,
+						f: self.currencyPrice
 					 }) +
 					 JSON.stringify(self.images) +
 					 self.geohash +
@@ -2383,6 +2383,7 @@ brtOffer = function(){
 				condition: self.condition,
 				images: self.images,
 				geohash: self.geohash,
+				currencyPrice: self.currencyPrice,
 				price: self.price,
 				published: self.published
 			};
@@ -2399,7 +2400,8 @@ brtOffer = function(){
 					t: self.tag,
 					a: self.tags,
 					c: self.condition,
-					p: self.published
+					p: self.published,
+					f: self.currencyPrice
 				}),
 				s5: JSON.stringify(self.images),
 				s6: self.geohash,
@@ -2419,6 +2421,7 @@ brtOffer = function(){
 		self.condition = d.condition,
 		self.images = d.images;
 		self.geohash = d.geohash;
+		self.currencyPrice = d.currencyPrice;
 		self.price = d.price;
 		self.published = d.published;
 	}

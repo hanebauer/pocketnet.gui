@@ -1,25 +1,26 @@
 {
-    "name": "pocketnet",
-    "project": "Bastyon",
+    "name": "lotos",
+    "project": "Lotos",
 
-    "version": "0.9.111",
+    "version": "0.9.112",
 
-    "versionsuffix": "1",
-    "cordovaversion": "1.8.111",
-    "cordovaversioncode": "1801111",
+    "versionsuffix": "2",
+    "cordovaversion": "1.8.112",
+    "cordovaversioncode": "1801122",
 
-    "description": "Bastyon desktop application",
-    "author": "Pocketnet Community <support@pocketnet.app>",
-    "company": "Pocketnet Community",
+    "description": "Lotos desktop application",
+    "author": "Lotos Community <support@lotos.io>",
+    "company": "Lotos Community",
     "license": "Apache-2.0",
     "main": "main.js",
-    "repository": "github:pocketnetapp/pocketnet.gui",
+    "repository": "github:hanebauer/pocketnet.gui",
     "scripts": {
         "start": "electron . --development",
         "startinspect": "electron . --development --inspect=9229",
         "start:test": "electron . --development --test",
         "pack": "electron-builder -w --dir --x64",
-        "build": "npm run build:proxy16 && npm run dev:bastyon",
+        "packl": "electron-builder -l --dir --x64",
+        "build": "npm run build:proxy16 && npm run dev:lotos",
         "build:proxy16": "cd proxy16 && npm run build",
         "dist": "electron-builder -w --x64 --ia32 -p never",
         "distl": "electron-builder -l --x64 -p never",
@@ -28,17 +29,17 @@
         "publish": "build --win --x64 --ia32 -p always",
         "minimize": "node minimize.js -prodaction=true -vendor=30069 -path=/",
         "minimize:test": "node minimize.js -prodaction=true -vendor=30069 -test=true -path=/",
-        "dev": "node minimize.js -prodaction=false -path=/pocketnet/ -project=Pocketnet",
-        "dev:test": "node minimize.js -prodaction=false -test=true -path=/pocketnet/ -project=Pocketnet",
-        "minimize:cordova": "node minimize.js -prodaction=true -vendor=30069 -path=/pocketnet/ -project=Bastyon -composetemplates=true",
-        "minimize:cordova:store": "node minimize.js -prodaction=true -vendor=30069 -path=/pocketnet/ -project=Bastyon -composetemplates=true -store=true",
-        "minimize:cordova:gfree": "node minimize.js -prodaction=true -vendor=30069 -path=/pocketnet/ -project=Bastyon -composetemplates=true -gfree=true",
-        "minimize:cordova:test": "node minimize.js -prodaction=true -test=true -vendor=30069 -path=/pocketnet/ -project=Bastyon -composetemplates=true",
-        "minimize:bastyon": "node minimize.js -prodaction=true -vendor=30069 -path=/ -project=Bastyon",
-        "minimize:bastyon:papp": "node minimize.js -prodaction=true -vendor=30069 -path=/ -project=BastyonPapp",
-        "minimize:bastyon:test": "node minimize.js -prodaction=true -vendor=30069 -test=true -path=/ -project=Bastyon",
-        "dev:bastyon": "node minimize.js -prodaction=false -path=/pocketnet/ -project=Bastyon",
-        "dev:bastyon:test": "node minimize.js -prodaction=false -test=true -path=/pocketnet/ -project=Bastyon",
+        "dev": "node minimize.js -prodaction=false -path=/lotos/ -project=Pocketnet",
+        "dev:test": "node minimize.js -prodaction=false -test=true -path=/lotos/ -project=Pocketnet",
+        "minimize:cordova": "node minimize.js -prodaction=true -vendor=30069 -path=/lotos/ -project=Lotos -composetemplates=true",
+        "minimize:cordova:store": "node minimize.js -prodaction=true -vendor=30069 -path=/lotos/ -project=Lotos -composetemplates=true -store=true",
+        "minimize:cordova:gfree": "node minimize.js -prodaction=true -vendor=30069 -path=/lotos/ -project=Lotos -composetemplates=true -gfree=true",
+        "minimize:cordova:test": "node minimize.js -prodaction=true -test=true -vendor=30069 -path=/lotos/ -project=Lotos -composetemplates=true",
+        "minimize:lotos": "node minimize.js -prodaction=true -vendor=30069 -path=/ -project=Lotos",
+        "minimize:lotos:papp": "node minimize.js -prodaction=true -vendor=30069 -path=/ -project=LotosPapp",
+        "minimize:lotos:test": "node minimize.js -prodaction=true -vendor=30069 -test=true -path=/ -project=Lotos",
+        "dev:lotos": "node minimize.js -prodaction=false -path=/lotos/ -project=Lotos",
+        "dev:lotos:test": "node minimize.js -prodaction=false -test=true -path=/lotos/ -project=Lotos",
         "node:embedding": "node minimize.js -prodaction=true -vendor=30069 -path=/web/"
     },
     "devDependencies": {
@@ -110,7 +111,7 @@
         "ws": "^8.16.0"
     },
     "build": {
-        "productName": "Bastyon",
+        "productName": "Lotos",
         "afterSign": "electron-builder-notarize",
         "appId": "app.pocketnet.gui",
         "files": [
@@ -141,9 +142,9 @@
             }
         ],
         "protocols": {
-            "name": "bastyon",
+            "name": "lotos",
             "schemes": [
-                "bastyon"
+                "lotos"
             ]
         },
         "mac": {
@@ -157,7 +158,7 @@
             ],
             "artifactName": "${productName}Setup.${ext}",
             "icon": "res/electron/icons/mac/icon.icns",
-            "extendInfo": "bastyon",
+            "extendInfo": "lotos",
             "hardenedRuntime": true,
             "entitlements": "./node_modules/electron-builder-notarize/entitlements.mac.inherit.plist",
             "notarize": {
@@ -178,7 +179,7 @@
             ],
             "artifactName": "${productName}Setup.${ext}",
             "category": "Network",
-            "executableName": "bastyon",
+            "executableName": "lotos",
             "description": "${productName} Desktop Browser"
         },
         "appImage": {
