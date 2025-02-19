@@ -2,11 +2,11 @@
     "name": "lotos",
     "project": "Lotos",
 
-    "version": "0.9.112",
+    "version": "0.9.113",
 
-    "versionsuffix": "2",
-    "cordovaversion": "1.8.112",
-    "cordovaversioncode": "1801122",
+    "versionsuffix": "0",
+    "cordovaversion": "1.8.113",
+    "cordovaversioncode": "1801130",
 
     "description": "Lotos desktop application",
     "author": "Lotos Community <support@lotos.io>",

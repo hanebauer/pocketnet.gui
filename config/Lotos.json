@@ -3,6 +3,7 @@
     "turl" : "test.lotos.social",
     "name" : "Lotos",
     "fullname" : "Lotos",
+    "preferredtags" : ["c4", "c5", "c6", "clotos", "eth", "btc"],
     "developapps" : [{
         "id" : "barteron.pocketnet.app",
         "version": "1.0.0",

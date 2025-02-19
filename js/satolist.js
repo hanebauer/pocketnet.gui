@@ -13636,6 +13636,26 @@ Platform = function (app, listofnodes) {
             data: {
                 all: {
                     en: [{
+                        name: "Etherium",
+                        tags: ['etherium', 'eth'],
+                        id: 'eth'
+                    },{
+                        name: "Bitcoin",
+                        tags: ['bitcoin', 'btc'],
+                        id: 'btc'
+                    },{
+                        name: "Etherium",
+                        tags: ['etherium', 'eth'],
+                        id: 'eth'
+                    },{
+                        name: "Bitcoin",
+                        tags: ['bitcoin', 'btc'],
+                        id: 'btc'
+                    },{
+                        name: "Lotos",
+                        tags: ['lotos'],
+                        id: 'clotos'
+                    },{
                             name: "Memes/Funny",
                             tags: ['funny', 'memes'],
                             id: 'c2'
@@ -13749,6 +13769,18 @@ Platform = function (app, listofnodes) {
                         }
                     ],
                     ru: [{
+                        name: "Etherium",
+                        tags: ['etherium', 'eth'],
+                        id: 'eth'
+                    },{
+                        name: "Bitcoin",
+                        tags: ['bitcoin', 'btc'],
+                        id: 'btc'
+                    },{
+                        name: "Lotos",
+                        tags: ['lotos'],
+                        id: 'clotos'
+                    },{
                             name: "Мемы/Юмор",
                             tags: ['мемы', 'юмор'],
                             id: 'c2'
@@ -13863,6 +13895,18 @@ Platform = function (app, listofnodes) {
                         }
                     ],
                     cmn: [{
+                        name: "Etherium",
+                        tags: ['etherium', 'eth'],
+                        id: 'eth'
+                    },{
+                        name: "Bitcoin",
+                        tags: ['bitcoin', 'btc'],
+                        id: 'btc'
+                    },{
+                        name: "Lotos",
+                        tags: ['lotos'],
+                        id: 'clotos'
+                    },{
                             name: "模因/幽默",
                             tags: ['模因', '幽默'],
                             id: 'c2'
@@ -13974,6 +14018,18 @@ Platform = function (app, listofnodes) {
                         }
                     ],
                     kr: [{
+                        name: "Etherium",
+                        tags: ['etherium', 'eth'],
+                        id: 'eth'
+                    },{
+                        name: "Bitcoin",
+                        tags: ['bitcoin', 'btc'],
+                        id: 'btc'
+                    },{
+                        name: "Lotos",
+                        tags: ['lotos'],
+                        id: 'clotos'
+                    },{
                             name: "밈/유머",
                             tags: ['밈', '유머'],
                             id: 'c2'
@@ -14086,6 +14142,18 @@ Platform = function (app, listofnodes) {
                         }
                     ],
                     fr: [{
+                        name: "Etherium",
+                        tags: ['etherium', 'eth'],
+                        id: 'eth'
+                    },{
+                        name: "Bitcoin",
+                        tags: ['bitcoin', 'btc'],
+                        id: 'btc'
+                    },{
+                        name: "Lotos",
+                        tags: ['lotos'],
+                        id: 'clotos'
+                    },{
                             name: "Mèmes/Humour",
                             tags: ['mèmes', 'humour'],
                             id: 'c2'
@@ -14197,6 +14265,18 @@ Platform = function (app, listofnodes) {
                         }
                     ],
                     es: [{
+                        name: "Etherium",
+                        tags: ['etherium', 'eth'],
+                        id: 'eth'
+                    },{
+                        name: "Bitcoin",
+                        tags: ['bitcoin', 'btc'],
+                        id: 'btc'
+                    },{
+                        name: "Lotos",
+                        tags: ['lotos'],
+                        id: 'clotos'
+                    },{
                             name: "Memes/Humor ",
                             tags: ['мемы', 'юмор'],
                             id: 'c2'
@@ -14308,6 +14388,18 @@ Platform = function (app, listofnodes) {
                         }
                     ],
                     de: [{
+                        name: "Etherium",
+                        tags: ['etherium', 'eth'],
+                        id: 'eth'
+                    },{
+                        name: "Bitcoin",
+                        tags: ['bitcoin', 'btc'],
+                        id: 'btc'
+                    },{
+                        name: "Lotos",
+                        tags: ['lotos'],
+                        id: 'clotos'
+                    },{
                             name: "Meme/Humor ",
                             tags: ['meme', 'hunor'],
                             id: 'c2'
@@ -14419,6 +14511,18 @@ Platform = function (app, listofnodes) {
                         }
                     ],
                     it: [{
+                        name: "Etherium",
+                        tags: ['etherium', 'eth'],
+                        id: 'eth'
+                    },{
+                        name: "Bitcoin",
+                        tags: ['bitcoin', 'btc'],
+                        id: 'btc'
+                    },{
+                        name: "Lotos",
+                        tags: ['lotos'],
+                        id: 'clotos'
+                    },{
                             name: "Meme/divertente",
                             tags: ['divertente', 'meme'],
                             id: 'c2'
@@ -14531,8 +14635,16 @@ Platform = function (app, listofnodes) {
                         }
                     ]
                 },
-
                 categoryIcons: [{
+                    "id": "btc",
+                    "icon": "fab fa-bitcoin"
+                },{
+                    "id": "eth",
+                    "icon": "fab fa-ethereum"
+                },{
+                    "id": "clotos",
+                    "icon": "fas fa-home"
+                },{
                         "id": "c2",
                         "icon": "far fa-smile"
                     },
@@ -15041,8 +15153,10 @@ Platform = function (app, listofnodes) {
                 var allcats = self.sdk.categories.get(_k)
 
                 var cats = _.filter(allcats, function (c) {
-                    return ids.indexOf(c.id > -1)
+                    return ids.indexOf(c.id) > -1
                 })
+
+                console.log('cats', cats, allcats, ids)
 
                 return cats
 
@@ -15082,7 +15196,7 @@ Platform = function (app, listofnodes) {
             save: function () {
 
                 try {
-                    localStorage['categoriessettings'] = JSON.stringify({
+                    localStorage['categoriessettings_l'] = JSON.stringify({
                         settings: self.sdk.categories.settings
                     })
                 } catch (e) {
@@ -15104,7 +15218,7 @@ Platform = function (app, listofnodes) {
 
 
                 try {
-                    p = JSON.parse(localStorage['categoriessettings'] || '{}');
+                    p = JSON.parse(localStorage['categoriessettings_l'] || '{}');
                 } catch (e) {}
 
 
@@ -15155,6 +15269,18 @@ Platform = function (app, listofnodes) {
                 new: true,
                 class: 'bright',
                 info: 'pkoin_commerce_info'
+            },{
+                tag: 'lotos',
+                class: 'bright',
+                positionincloud : 1,
+            },{
+                tag: 'lotusmarket',
+                class: 'bright',
+                positionincloud : 2,
+            },{
+                tag: 'lotusterminal',
+                class: 'bright',
+                positionincloud : 3,
             }],
 
             findadditional: function (tag) {
@@ -15306,33 +15432,35 @@ Platform = function (app, listofnodes) {
                         t.get('', 100, (round(self.currentBlock, 1000) - 23700), loc, function (d, error) {
                             if (!s.cloud) s.cloud = {}
 
-                            if (!error) s.cloud[loc] = d
+                            if (!error) {
+                                s.cloud[loc] = d
 
-                            _.each(t.additional, function (at) {
+                                _.each(t.additional, function (at) {
 
-                                if (at.positionincloud) {
+                                    if (at.positionincloud) {
 
-                                    var lt = _.find(s.cloud, function (t) {
-                                        return t.tag == at.tag
-                                    })
+                                        var lt = _.find(s.cloud[loc], function (t) {
+                                            return t.tag == at.tag
+                                        })
 
-                                    if (!lt) {
-                                        var vs = _.clone(at)
-                                        s.cloud.push(vs)
-                                    }
+                                        if (!lt) {
+                                            var vs = _.clone(at)
+                                            s.cloud[loc].push(vs)
+                                        }
 
-                                    if (lt) {
+                                        if (lt) {
 
-                                        lt.positionincloud = at.positionincloud
-                                        lt.class = at.class
+                                            lt.positionincloud = at.positionincloud
+                                            lt.class = at.class
 
-                                        if (lt.count < 2000) {
-                                            lt.new = at.new
+                                            if (lt.count < 2000) {
+                                                lt.new = at.new
+                                            }
                                         }
                                     }
-                                }
 
-                            })
+                                })
+                            }
 
                             if (clbk) {
                                 clbk(s.cloud[loc], error)
