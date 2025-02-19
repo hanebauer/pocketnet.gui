@@ -2664,7 +2664,7 @@ var share = (function(){
 				if(essenseData.dontsave) return
 
 				if(!currentShare){
-					self.app.settings.set(self.map.id, 'currentShare_v1', '');
+					self.app.settings.set(self.map.id, 'currentShare_v2', '');
 				}
 				else
 				{
@@ -2677,7 +2677,7 @@ var share = (function(){
 
 					if (exp.message == m) exp.message = ''
 
-					var scs = self.app.settings.set(self.map.id, 'currentShare_v1', exp);
+					var scs = self.app.settings.set(self.map.id, 'currentShare_v2', exp);
 
 				}
 				
@@ -2686,7 +2686,7 @@ var share = (function(){
 
 				if(essenseData.dontsave) return
 
-				var last = self.app.settings.get(self.map.id, 'currentShare_v1')
+				var last = self.app.settings.get(self.map.id, 'currentShare_v2')
 
 				if (last){
 
@@ -2822,7 +2822,7 @@ var share = (function(){
 						}
 						else{
 
-							var preferred = self.app.platform.sdk.categories.getbyids(window.project_config.preferredtags, self.app.localization.key)
+							var preferred = self.app.platform.sdk.categories.getbyids(['clotos'], self.app.localization.key)
 
 							var preferredtags = []
 
