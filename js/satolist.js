@@ -24392,6 +24392,8 @@ Platform = function (app, listofnodes) {
 
             self.preparePeertubeServer();
 
+            self.sdk.categories.load()
+
             self.prepareUser(function () {
 
                 self.ui.externalFromCurrentUrl()
@@ -24556,7 +24558,7 @@ Platform = function (app, listofnodes) {
 
                         //self.sdk.exchanges.load,
                         self.sdk.articles.init,
-                        self.sdk.categories.load,
+                        
                         self.sdk.activity.load,
                         self.sdk.memtags.load,
                         self.sdk.recommendations.init,
